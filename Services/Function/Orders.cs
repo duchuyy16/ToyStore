@@ -30,12 +30,12 @@ namespace Services.Function
 
         public List<Order> GetAll()
         {
-            return _context.Orders.Include(o => o.User).Include(o => o.Status).ToList();
+            return _context.Orders.Include(o => o.Status).ToList();
         }
 
         public Order GetById(int id)
         {
-            var order = _context.Orders.Include(o => o.User).Include(o => o.Status).SingleOrDefault(s => s.OrderId == id);
+            var order = _context.Orders.Include(o => o.Status).SingleOrDefault(s => s.OrderId == id);
 
             if (order == null)
             {

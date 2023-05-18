@@ -6,7 +6,13 @@ using System.Net.Security;
 
 namespace ToyStoreAPI.Helpers
 {
-    public static class EmailHelper
+    public class Account
+    {
+        public string? Email { get; set; }
+        public string? Password { get; set; }
+    }
+    
+    public class EmailHelper
     {
         //Trình xác thực này luôn trả về giá trị true, cho phép SmtpClient kết nối với máy chủ email mà không cần xác thực chứng chỉ SSL.
         public class CustomSslCertificateValidator
@@ -17,12 +23,19 @@ namespace ToyStoreAPI.Helpers
             }
         }
 
-        public static void SendEmail(string contactName,string formAdrress, string messageBody)
+        private readonly Account _account;
+
+        public EmailHelper(Account account)
         {
+            this._account = account;
+        }
+
+        public void SendEmail(string contactName,string formAdrress, string messageBody)
+        {
+
             var message = new MimeMessage();
             message.From.Add(new MailboxAddress("", formAdrress));
             message.To.Add(new MailboxAddress("", "duchuyy16@gmail.com"));
-            //message.To.Add(new MailboxAddress("", toAddress));
             message.Subject = "Mail From Contact Us";
             message.Body = new TextPart("html")
             {
@@ -34,7 +47,7 @@ namespace ToyStoreAPI.Helpers
             using var client = new SmtpClient();
             client.ServerCertificateValidationCallback = CustomSslCertificateValidator.ValidateCertificate!;
             client.Connect("smtp.gmail.com", 587, SecureSocketOptions.StartTls);
-            client.Authenticate("duchuyy16@gmail.com", "opeifkfxcqidghwg");
+            client.Authenticate(_account.Email,_account.Password);
             client.Send(message);
             client.Disconnect(true);
         }

@@ -17,22 +17,22 @@ namespace Services.Function
 
         public Contact Find(int id)
         {
-            throw new NotImplementedException();
+            return _context.Contacts.Find(id)!;
         }
 
         public List<Contact> GetAll()
         {
-            throw new NotImplementedException();
+            return _context.Contacts.ToList();
         }
 
         public Contact GetById(int id)
         {
-            throw new NotImplementedException();
+            return _context.Contacts.SingleOrDefault(c => c.ContactId == id)!;
         }
 
         public bool IsIdExist(int id)
         {
-            throw new NotImplementedException();
+            return _context.Contacts.Any(p => p.ContactId == id);
         }
     }
 }

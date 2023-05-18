@@ -28,7 +28,6 @@ namespace ToyStoreAPI.Controllers
                 OrderModel orderModel = new OrderModel
                 {   
                     OrderId=item.OrderId,
-                    UserId=item.UserId,
                     OrderDate=item.OrderDate,
                     EstimatedDeliveryDate=item.EstimatedDeliveryDate,
                     StatusId=item.StatusId
@@ -47,7 +46,6 @@ namespace ToyStoreAPI.Controllers
             OrderModel categoryModel = new OrderModel
             {
                 OrderId = order.OrderId,
-                UserId = order.UserId,
                 OrderDate = order.OrderDate,
                 EstimatedDeliveryDate = order.EstimatedDeliveryDate,
                 StatusId = order.StatusId
@@ -64,7 +62,6 @@ namespace ToyStoreAPI.Controllers
             OrderModel categoryModel = new OrderModel
             {
                 OrderId = order.OrderId,
-                UserId = order.UserId,
                 OrderDate = order.OrderDate,
                 EstimatedDeliveryDate = order.EstimatedDeliveryDate,
                 StatusId = order.StatusId
@@ -84,7 +81,6 @@ namespace ToyStoreAPI.Controllers
         {
             var newOrder = new Order
             {
-                UserId = orderModel.UserId,
                 OrderDate = orderModel.OrderDate,
                 EstimatedDeliveryDate = orderModel.EstimatedDeliveryDate,
                 StatusId = orderModel.StatusId
@@ -95,7 +91,6 @@ namespace ToyStoreAPI.Controllers
             if (addedOrder == null) return new OrderModel();
 
             return new OrderModel {
-                UserId = addedOrder.UserId,
                 OrderDate = addedOrder.OrderDate,
                 EstimatedDeliveryDate = addedOrder.EstimatedDeliveryDate,
                 StatusId = addedOrder.StatusId
@@ -108,7 +103,6 @@ namespace ToyStoreAPI.Controllers
             var order = new Order
             {
                 OrderId=orderModel.OrderId,    
-                UserId = orderModel.UserId,
                 OrderDate = orderModel.OrderDate,
                 EstimatedDeliveryDate = orderModel.EstimatedDeliveryDate,
                 StatusId = orderModel.StatusId

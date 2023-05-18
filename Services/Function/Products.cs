@@ -65,7 +65,7 @@ namespace Services.Function
 
         public List<Product> GetProductsByCategory(int categoryId)
         {
-            return _context.Products.Where(c=>c.CategoryId == categoryId).Include(p => p.Category).ToList();
+            return _context.Products.Where(c => c.CategoryId == categoryId).Include(p => p.Category).ToList();
         }
     }
 }
