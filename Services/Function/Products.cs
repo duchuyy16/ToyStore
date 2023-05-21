@@ -24,9 +24,9 @@ namespace Services.Function
                     .ToList();
         }
 
-        public List<Product> Search(string name)
+        public List<Product> Search(string keyword)
         {
-            return _context.Products.Where(m => m.ProductName.Contains(name)).Include(p => p.Category).ToList();
+            return _context.Products.Where(m => m.ProductName.Contains(keyword)).Include(p => p.Category).ToList();
         }
 
         public Product Find(int id)

@@ -28,6 +28,7 @@ namespace Services.Function
             return orderDetail;
         }
 
+
         public List<OrderDetail> GetAll()
         {
             return _context.OrderDetails.Include(o => o.Order).Include(o => o.Product).ToList();

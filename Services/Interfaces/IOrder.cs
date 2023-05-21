@@ -13,6 +13,7 @@ namespace Services.Interfaces
         List<Order> GetAll();
         Order GetById(int id);
         Order Find(int id);
+        int FindMaxId();
         bool IsIdExist(int id);
     }
 }

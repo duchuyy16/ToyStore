@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Mapster;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Services.Interfaces;
 using Services.Models;
@@ -28,9 +29,15 @@ namespace ToyStoreAPI.Controllers
                 OrderModel orderModel = new OrderModel
                 {   
                     OrderId=item.OrderId,
+                    CustomerName=item.CustomerName,
+                    CustomerPhone=item.CustomerPhone,
+                    CustomerEmail=item.CustomerEmail,
+                    CustomerAddress=item.CustomerAddress,
                     OrderDate=item.OrderDate,
                     EstimatedDeliveryDate=item.EstimatedDeliveryDate,
-                    StatusId=item.StatusId
+                    StatusId=item.StatusId,
+                    Status = item.Status.Adapt<StatusModel>(),
+                   
                 };
                 lstOrder.Add(orderModel);
             }
@@ -46,9 +53,14 @@ namespace ToyStoreAPI.Controllers
             OrderModel categoryModel = new OrderModel
             {
                 OrderId = order.OrderId,
+                CustomerName = order.CustomerName,
+                CustomerEmail = order.CustomerEmail,
+                CustomerPhone = order.CustomerPhone,
+                CustomerAddress = order.CustomerAddress,
                 OrderDate = order.OrderDate,
                 EstimatedDeliveryDate = order.EstimatedDeliveryDate,
-                StatusId = order.StatusId
+                StatusId = order.StatusId,
+                Status = order.Status.Adapt<StatusModel>(),
             };
 
             return categoryModel;
@@ -62,9 +74,14 @@ namespace ToyStoreAPI.Controllers
             OrderModel categoryModel = new OrderModel
             {
                 OrderId = order.OrderId,
+                CustomerName = order.CustomerName,
+                CustomerEmail = order.CustomerEmail,
+                CustomerPhone = order.CustomerPhone,
+                CustomerAddress = order.CustomerAddress,
                 OrderDate = order.OrderDate,
                 EstimatedDeliveryDate = order.EstimatedDeliveryDate,
-                StatusId = order.StatusId
+                StatusId = order.StatusId,
+                Status = order.Status.Adapt<StatusModel>(),
             };
 
             return categoryModel;
@@ -81,8 +98,12 @@ namespace ToyStoreAPI.Controllers
         {
             var newOrder = new Order
             {
+                CustomerName = orderModel.CustomerName,
+                CustomerEmail= orderModel.CustomerEmail,
+                CustomerPhone= orderModel.CustomerPhone,
+                CustomerAddress= orderModel.CustomerAddress,
                 OrderDate = orderModel.OrderDate,
-                EstimatedDeliveryDate = orderModel.EstimatedDeliveryDate,
+                EstimatedDeliveryDate = orderModel.EstimatedDeliveryDate.AddDays(3),
                 StatusId = orderModel.StatusId
             };
 
@@ -91,8 +112,13 @@ namespace ToyStoreAPI.Controllers
             if (addedOrder == null) return new OrderModel();
 
             return new OrderModel {
+                OrderId = addedOrder.OrderId,
+                CustomerName = addedOrder.CustomerName,
+                CustomerEmail = addedOrder.CustomerEmail,
+                CustomerPhone = addedOrder.CustomerPhone,
+                CustomerAddress = addedOrder.CustomerAddress,
                 OrderDate = addedOrder.OrderDate,
-                EstimatedDeliveryDate = addedOrder.EstimatedDeliveryDate,
+                EstimatedDeliveryDate = addedOrder.EstimatedDeliveryDate.AddDays(3),
                 StatusId = addedOrder.StatusId
             };
         }
@@ -102,7 +128,11 @@ namespace ToyStoreAPI.Controllers
         {
             var order = new Order
             {
-                OrderId=orderModel.OrderId,    
+                OrderId=orderModel.OrderId,
+                CustomerName = orderModel.CustomerName,
+                CustomerEmail = orderModel.CustomerEmail,
+                CustomerPhone = orderModel.CustomerPhone,
+                CustomerAddress = orderModel.CustomerAddress,
                 OrderDate = orderModel.OrderDate,
                 EstimatedDeliveryDate = orderModel.EstimatedDeliveryDate,
                 StatusId = orderModel.StatusId

@@ -234,31 +234,6 @@ namespace Services.Migrations
             //    });
 
             //migrationBuilder.CreateTable(
-            //    name: "User",
-            //    columns: table => new
-            //    {
-            //        UserID = table.Column<int>(type: "int", nullable: false)
-            //            .Annotation("SqlServer:Identity", "1, 1"),
-            //        Username = table.Column<string>(type: "varchar(200)", unicode: false, maxLength: 200, nullable: false),
-            //        Password = table.Column<string>(type: "varchar(200)", unicode: false, maxLength: 200, nullable: false),
-            //        Fullname = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
-            //        DateOfBirth = table.Column<DateTime>(type: "date", nullable: false),
-            //        Email = table.Column<string>(type: "varchar(200)", unicode: false, maxLength: 200, nullable: false),
-            //        Phone = table.Column<string>(type: "varchar(50)", unicode: false, maxLength: 50, nullable: false),
-            //        ShippingAddress = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
-            //        RoleID = table.Column<int>(type: "int", nullable: true)
-            //    },
-            //    constraints: table =>
-            //    {
-            //        table.PrimaryKey("PK_User", x => x.UserID);
-            //        table.ForeignKey(
-            //            name: "FK_User_Role",
-            //            column: x => x.RoleID,
-            //            principalTable: "Role",
-            //            principalColumn: "RoleID");
-            //    });
-
-            //migrationBuilder.CreateTable(
             //    name: "Order",
             //    columns: table => new
             //    {

@@ -18,14 +18,15 @@ namespace Services.Base
         {
             try
             {
-                var ent = _context.Set<T>().Add(entity);
+                _context.Set<T>().Add(entity);
                 _context.SaveChanges();
-                return ent.Entity;
+                return entity;
             }
             catch (Exception)
             {
                 return null;
             }
+            //xoa trycatch  
         }
 
         public bool Update(T entity)

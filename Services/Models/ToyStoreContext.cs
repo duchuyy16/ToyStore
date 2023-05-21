@@ -1,11 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata;
+
 
 namespace Services.Models
 {
-    public partial class ToyStoreContext : DbContext
+    public partial class ToyStoreContext : DbContext 
     {
         public ToyStoreContext()
         {
@@ -149,6 +148,18 @@ namespace Services.Models
                 entity.ToTable("Order");
 
                 entity.Property(e => e.OrderId).HasColumnName("OrderID");
+
+                entity.Property(e => e.CustomerAddress).HasMaxLength(200);
+
+                entity.Property(e => e.CustomerEmail)
+                    .HasMaxLength(100)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.CustomerName).HasMaxLength(100);
+
+                entity.Property(e => e.CustomerPhone)
+                    .HasMaxLength(11)
+                    .IsUnicode(false);
 
                 entity.Property(e => e.EstimatedDeliveryDate).HasColumnType("date");
 

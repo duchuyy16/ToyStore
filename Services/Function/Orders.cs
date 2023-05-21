@@ -28,6 +28,11 @@ namespace Services.Function
             return order;
         }
 
+        public int FindMaxId()
+        {
+            return _context.Orders.Max(o => o.OrderId);
+        }
+
         public List<Order> GetAll()
         {
             return _context.Orders.Include(o => o.Status).ToList();

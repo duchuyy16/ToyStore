@@ -1,4 +1,5 @@
 ﻿using Mapster;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Services.Interfaces;
@@ -103,10 +104,11 @@ namespace ToyStoreAPI.Controllers
             return lstProduct;
         }
 
-        [HttpPost("SearchByProductName/{name}")]
-        public List<ProductModel> SearchByProductName(string name)
+        //[Authorize(Roles = UserRoles.Admin)]
+        [HttpPost("SearchByProductName/{keyword}")]
+        public List<ProductModel> SearchByProductName(string keyword)
         {
-            var products = _iProduct.Search(name);
+            var products = _iProduct.Search(keyword);
 
             List<ProductModel> lstProduct = new List<ProductModel>();
 
@@ -130,6 +132,7 @@ namespace ToyStoreAPI.Controllers
             return lstProduct;
         }
 
+        //[Authorize]
         [HttpPost("GetProductById/{id}")]
         public ProductModel GetProductById(int id)
         {

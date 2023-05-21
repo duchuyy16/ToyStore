@@ -11,9 +11,11 @@ namespace ToyStoreAPI.Controllers
     public class OrderDetailsController : ControllerBase
     {
         private readonly IOrderDetail _iOrderDetail;
-        public OrderDetailsController(IOrderDetail iOrderDetail)
+        private readonly IOrder _iOrder;
+        public OrderDetailsController(IOrderDetail iOrderDetail, IOrder iOrder)
         {
             _iOrderDetail = iOrderDetail;
+            _iOrder = iOrder;
         }
 
         [HttpPost("GetAllOrderDetails")]
@@ -85,6 +87,8 @@ namespace ToyStoreAPI.Controllers
         [HttpPost("AddOrderDetail")]
         public OrderDetailModel AddOrderDetail(OrderDetailModel orderDetailModel)
         {
+            var orderId = _iOrder.FindMaxId();
+
             var newOrderDetail = new OrderDetail
             {
                 OrderId = orderDetailModel.OrderId,

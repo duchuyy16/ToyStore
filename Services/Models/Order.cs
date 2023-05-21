@@ -14,7 +14,10 @@ namespace Services.Models
         public DateTime OrderDate { get; set; }
         public DateTime EstimatedDeliveryDate { get; set; }
         public int StatusId { get; set; }
-
+        public string? CustomerName { get; set; }
+        public string? CustomerEmail { get; set; }
+        public string? CustomerPhone { get; set; }
+        public string? CustomerAddress { get; set; }
         public virtual Status Status { get; set; } = null!;
         public virtual ICollection<OrderDetail> OrderDetails { get; set; }
     }

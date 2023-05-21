@@ -14,7 +14,7 @@ namespace Services.Interfaces
         List<Product> GetAll();
         List<Product> GetProductsByCategory(int categoryId);
         Product GetById(int id);
-        List<Product> Search(string name);
+        List<Product> Search(string keyword);
         Product Find(int id);
         bool IsIdExist(int id);
     }

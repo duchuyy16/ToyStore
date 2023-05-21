@@ -6,6 +6,7 @@ using Services.Function;
 using Services.Interfaces;
 using Services.Models;
 using System.Text;
+using ToyStoreAPI.Auth;
 using ToyStoreAPI.Helpers;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -14,9 +15,14 @@ ConfigurationManager configuration = builder.Configuration;
 
 builder.Services.AddControllers();
 
+
+// For Entity Framework
+builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(configuration.GetConnectionString("ToyStoreConnectString")));
+
+
 // For Identity
 builder.Services.AddIdentity<IdentityUser, IdentityRole>()
-    .AddEntityFrameworkStores<ToyStoreContext>()
+    .AddEntityFrameworkStores<ApplicationDbContext>()
     .AddDefaultTokenProviders();
 
 // Adding Authentication
