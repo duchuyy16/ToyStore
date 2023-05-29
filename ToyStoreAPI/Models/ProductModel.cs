@@ -12,7 +12,6 @@ namespace ToyStoreAPI.Models
         public string Description { get; set; } = null!;
         public string Image { get; set; } = null!;
         public int CategoryId { get; set; }
-
-        public  CategoryModel Category { get; set; } = null!;
+        public  CategoryModel? Category { get; set; }
     }
 }

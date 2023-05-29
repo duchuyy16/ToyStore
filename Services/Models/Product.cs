@@ -18,8 +18,7 @@ namespace Services.Models
         public string Description { get; set; } = null!;
         public string Image { get; set; } = null!;
         public int CategoryId { get; set; }
-
-        public virtual Category Category { get; set; } = null!;
+        public virtual Category? Category { get; set; }
         public virtual ICollection<OrderDetail> OrderDetails { get; set; }
     }
 }

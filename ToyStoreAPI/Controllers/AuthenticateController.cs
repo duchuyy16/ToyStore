@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
@@ -38,7 +39,7 @@ namespace ToyStoreAPI.Controllers
 
             return token;
         }
-
+        
         [HttpPost]
         [Route("login")]
         public async Task<IActionResult> Login([FromBody] LoginModel model)
@@ -59,6 +60,8 @@ namespace ToyStoreAPI.Controllers
                     authClaims.Add(new Claim(ClaimTypes.Role, userRole));
                 }
 
+
+
                 var token = GetToken(authClaims);
 
                 return Ok(new
@@ -69,6 +72,14 @@ namespace ToyStoreAPI.Controllers
             }
             return Unauthorized();
         }
+
+        //[Authorize]
+        //[HttpPost]
+        //public async Task Logout()
+        //{
+        //    await signInMa
+
+        //}
 
         [HttpPost]
         [Route("register")]

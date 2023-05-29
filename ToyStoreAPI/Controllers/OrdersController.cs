@@ -1,4 +1,5 @@
 ﻿using Mapster;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Services.Interfaces;
@@ -93,6 +94,7 @@ namespace ToyStoreAPI.Controllers
             return _iOrder.IsIdExist(id);
         }
 
+        
         [HttpPost("AddOrder")]
         public OrderModel AddOrder(OrderModel orderModel)
         {

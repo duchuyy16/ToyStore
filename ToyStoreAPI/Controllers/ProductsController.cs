@@ -13,9 +13,11 @@ namespace ToyStoreAPI.Controllers
     public class ProductsController : ControllerBase
     {
         private readonly IProduct _iProduct;
-        public ProductsController(IProduct iProduct)
+        private readonly IWebHostEnvironment _webHostEnvironment;
+        public ProductsController(IProduct iProduct, IWebHostEnvironment webHostEnvironment)
         {
             _iProduct = iProduct;
+            _webHostEnvironment = webHostEnvironment;
         }
 
         [HttpPost("GetAllProductsBestSellers")]
@@ -37,7 +39,7 @@ namespace ToyStoreAPI.Controllers
                     Image = item.Image,
                     ModelYear = item.ModelYear,
                     Description = item.Description,
-                    Category = item.Category.Adapt<CategoryModel>()
+                    Category = item.Category!.Adapt<CategoryModel>()
                     //Category = new CategoryModel()
                     //{
                     //    CategoryId = item.Category.CategoryId,
@@ -69,7 +71,7 @@ namespace ToyStoreAPI.Controllers
                     Image = item.Image,
                     ModelYear = item.ModelYear,
                     Description = item.Description,
-                    Category = item.Category.Adapt<CategoryModel>()
+                    Category = item.Category!.Adapt<CategoryModel>()
                 };
                 lstProduct.Add(productModel);
             }
@@ -96,7 +98,7 @@ namespace ToyStoreAPI.Controllers
                     Image = item.Image,
                     ModelYear = item.ModelYear,
                     Description = item.Description,
-                    Category = item.Category.Adapt<CategoryModel>()
+                    Category = item.Category!.Adapt<CategoryModel>()
                 };
                 lstProduct.Add(productModel);
             }
@@ -104,7 +106,7 @@ namespace ToyStoreAPI.Controllers
             return lstProduct;
         }
 
-        //[Authorize(Roles = UserRoles.Admin)]
+
         [HttpPost("SearchByProductName/{keyword}")]
         public List<ProductModel> SearchByProductName(string keyword)
         {
@@ -124,7 +126,7 @@ namespace ToyStoreAPI.Controllers
                     Image = item.Image,
                     ModelYear = item.ModelYear,
                     Description = item.Description,
-                    Category = item.Category.Adapt<CategoryModel>()
+                    Category = item.Category!.Adapt<CategoryModel>()
                 };
                 lstProduct.Add(productModel);
             }
@@ -148,7 +150,7 @@ namespace ToyStoreAPI.Controllers
                 Image = product.Image,
                 ModelYear = product.ModelYear,
                 Description = product.Description,
-                Category = product.Category.Adapt<CategoryModel>()
+                Category = product.Category!.Adapt<CategoryModel>()
             };
 
             return productModel;
@@ -169,7 +171,7 @@ namespace ToyStoreAPI.Controllers
                 Image = product.Image,
                 ModelYear = product.ModelYear,
                 Description = product.Description,
-                Category = product.Category.Adapt<CategoryModel>()
+                Category = product.Category!.Adapt<CategoryModel>()
             };
 
             return productModel;
@@ -209,13 +211,13 @@ namespace ToyStoreAPI.Controllers
                 Discount = addedProduct.Discount,
                 Image = addedProduct.Image,
                 ModelYear = addedProduct.ModelYear,
-                Description = addedProduct.Description               
+                Description = addedProduct.Description
             };
         }
 
         [HttpPost("UpdateProduct")]
-        public bool UpdateProduct(ProductModel productModel)
-        {
+        public bool UpdateProduct([FromForm] ProductModel productModel,IFormFile imageFile)
+        {        
             var product = new Product
             {
                 ProductId = productModel.ProductId,
@@ -227,9 +229,28 @@ namespace ToyStoreAPI.Controllers
                 ModelYear = productModel.ModelYear,
                 Description = productModel.Description
             };
+
+            if (imageFile == null) return false;
+
+            UploadFiles(imageFile,product);
             var updateResult = _iProduct.Update(product);
+
             return updateResult;
         }
+        [NonAction]
+        public void UploadFiles(IFormFile file, Product model)
+        {
+            string directoryPath = Path.Combine(_webHostEnvironment.ContentRootPath, "wwwroot", "UploadFiles");
+            Directory.CreateDirectory(directoryPath);
+            string filePath = Path.Combine(directoryPath, file.FileName);
+            using (var stream = new FileStream(filePath, FileMode.Create))
+            {
+                file.CopyTo(stream);
+            }
+            model.Image = file.FileName;
+        }
+
+
 
         [HttpPost("DeleteProduct")]
         public bool DeleteProduct(ProductModel productModel)

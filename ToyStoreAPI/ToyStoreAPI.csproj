@@ -28,4 +28,32 @@
     <Folder Include="Auth\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Include="wwwroot\UploadFiles\anh1.jpg" />
+    <None Include="wwwroot\UploadFiles\anh10.jpg" />
+    <None Include="wwwroot\UploadFiles\anh11.jpg" />
+    <None Include="wwwroot\UploadFiles\anh12.jpg" />
+    <None Include="wwwroot\UploadFiles\anh13.jpg" />
+    <None Include="wwwroot\UploadFiles\anh14.jpg" />
+    <None Include="wwwroot\UploadFiles\anh15.jpg" />
+    <None Include="wwwroot\UploadFiles\anh16.jpg" />
+    <None Include="wwwroot\UploadFiles\anh17.jpg" />
+    <None Include="wwwroot\UploadFiles\anh18.jpg" />
+    <None Include="wwwroot\UploadFiles\anh19.jpg" />
+    <None Include="wwwroot\UploadFiles\anh2.jpg" />
+    <None Include="wwwroot\UploadFiles\anh20.jpg" />
+    <None Include="wwwroot\UploadFiles\anh21.jpg" />
+    <None Include="wwwroot\UploadFiles\anh22.jpg" />
+    <None Include="wwwroot\UploadFiles\anh23.jpg" />
+    <None Include="wwwroot\UploadFiles\anh24.jpg" />
+    <None Include="wwwroot\UploadFiles\anh25.jpg" />
+    <None Include="wwwroot\UploadFiles\anh3.jpg" />
+    <None Include="wwwroot\UploadFiles\anh4.jpg" />
+    <None Include="wwwroot\UploadFiles\anh5.jpg" />
+    <None Include="wwwroot\UploadFiles\anh6.jpg" />
+    <None Include="wwwroot\UploadFiles\anh7.jpg" />
+    <None Include="wwwroot\UploadFiles\anh8.jpg" />
+    <None Include="wwwroot\UploadFiles\anh9.jpg" />
+  </ItemGroup>
+
 </Project>

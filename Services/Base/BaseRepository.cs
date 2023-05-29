@@ -16,45 +16,23 @@ namespace Services.Base
         }
         public T? Add(T entity)
         {
-            try
-            {
-                _context.Set<T>().Add(entity);
-                _context.SaveChanges();
-                return entity;
-            }
-            catch (Exception)
-            {
-                return null;
-            }
-            //xoa trycatch  
+            _context.Set<T>().Add(entity);
+            _context.SaveChanges();
+            return entity;
         }
 
         public bool Update(T entity)
         {
-            try
-            {
-                _context.Entry(entity).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
-                _context.SaveChanges();
-                return true;
-            }
-            catch (Exception)
-            {
-                return false;
-            }
+            _context.Entry(entity).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+            _context.SaveChanges();
+            return true;
         }
 
         public bool Delete(T entity)
         {
-            try
-            {
-                _context.Remove(entity);
-                _context.SaveChanges();
-                return true;
-            }
-            catch (Exception)
-            {
-                return false;
-            }
+            _context.Remove(entity);
+            _context.SaveChanges();
+            return true;
         }
 
     }
