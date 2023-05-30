@@ -60,8 +60,6 @@ namespace ToyStoreAPI.Controllers
                     authClaims.Add(new Claim(ClaimTypes.Role, userRole));
                 }
 
-
-
                 var token = GetToken(authClaims);
 
                 return Ok(new
@@ -72,14 +70,6 @@ namespace ToyStoreAPI.Controllers
             }
             return Unauthorized();
         }
-
-        //[Authorize]
-        //[HttpPost]
-        //public async Task Logout()
-        //{
-        //    await signInMa
-
-        //}
 
         [HttpPost]
         [Route("register")]
@@ -135,5 +125,16 @@ namespace ToyStoreAPI.Controllers
             
             return Ok(new Response { Status = "Success", Message = "User created successfully!" });
         }
+
+
+
+
+        //[Authorize]
+        //[HttpPost]
+        //public async Task Logout()
+        //{
+        //    await signInMa
+
+        //}
     }
 }
