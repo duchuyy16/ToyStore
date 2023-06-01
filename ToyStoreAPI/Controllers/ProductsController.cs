@@ -250,8 +250,6 @@ namespace ToyStoreAPI.Controllers
             model.Image = file.FileName;
         }
 
-
-
         [HttpPost("DeleteProduct")]
         public bool DeleteProduct(ProductModel productModel)
         {
@@ -259,6 +257,13 @@ namespace ToyStoreAPI.Controllers
             if (product == null) return false;
             var deleteResult = _iProduct.Delete(product);
             return deleteResult;
+        }
+
+        [HttpPost("CountProducts")]
+        public int CountProducts()
+        {
+            int count = _iProduct.CountProducts();       
+            return count;
         }
     }
 }

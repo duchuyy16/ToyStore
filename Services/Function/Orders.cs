@@ -16,6 +16,11 @@ namespace Services.Function
         {
         }
 
+        public int CountOrders()
+        {
+            return _context.Orders.Count();
+        }
+
         public Order Find(int id)
         {
             var order = _context.Orders.Find(id);

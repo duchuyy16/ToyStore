@@ -105,5 +105,12 @@ namespace ToyStoreAPI.Controllers
             var deleteResult = _iCategory.Delete(category);
             return deleteResult;
         }
+
+        [HttpPost("CountCategories")]
+        public int CountCategories()
+        {
+            int count = _iCategory.CountCategories();
+            return count;
+        }
     }
 }

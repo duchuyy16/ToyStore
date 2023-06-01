@@ -15,5 +15,6 @@ namespace Services.Interfaces
         Order Find(int id);
         int FindMaxId();
         bool IsIdExist(int id);
+        int CountOrders();
     }
 }

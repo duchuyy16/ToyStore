@@ -60,6 +60,7 @@ builder.Services.AddScoped<ICategory, Categories>();
 builder.Services.AddScoped<IContact, Contacts>();
 builder.Services.AddScoped<IStatus, Statuses>();
 builder.Services.AddScoped<IOrder, Orders>();
+builder.Services.AddScoped<IUser, Users>();
 builder.Services.AddScoped<IOrderDetail, OrderDetails>();
 builder.Services.AddSingleton<Account>(new Account { Email= configuration["Email:Username"], Password = configuration["Email:Password"] });
 builder.Services.AddScoped<EmailHelper>();

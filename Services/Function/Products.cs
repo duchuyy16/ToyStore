@@ -67,5 +67,10 @@ namespace Services.Function
         {
             return _context.Products.Where(c => c.CategoryId == categoryId).Include(p => p.Category).ToList();
         }
+
+        public int CountProducts()
+        {
+            return _context.Products.Count();
+        }
     }
 }

@@ -15,6 +15,11 @@ namespace Services.Function
         {
         }
 
+        public int CountCategories()
+        {
+            return _context.Categories.Count();
+        }
+
         public Category Find(int id)
         {
             var category = _context.Categories.Find(id);

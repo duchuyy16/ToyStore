@@ -17,5 +17,6 @@ namespace Services.Interfaces
         List<Product> Search(string keyword);
         Product Find(int id);
         bool IsIdExist(int id);
+        int CountProducts();
     }
 }

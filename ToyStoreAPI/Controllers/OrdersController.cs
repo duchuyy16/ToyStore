@@ -151,5 +151,12 @@ namespace ToyStoreAPI.Controllers
             var deleteResult = _iOrder.Delete(order);
             return deleteResult;
         }
+
+        [HttpPost("CountOrders")]
+        public int CountOrders()
+        {
+            int count = _iOrder.CountOrders();
+            return count;
+        }
     }
 }

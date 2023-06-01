@@ -14,5 +14,6 @@ namespace Services.Interfaces
         Category GetById(int id);
         Category Find(int id);
         bool IsIdExist(int id);
+        int CountCategories();
     }
 }
