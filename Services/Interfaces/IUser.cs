@@ -10,6 +10,9 @@ namespace Services.Interfaces
 {
     public interface IUser : IBaseRepository<AspNetUser>
     {
+        List<AspNetUser> GetAll();
+        AspNetUser GetById(string id);
+        bool IsIdExist(string id);
         int CountUsers();
     }
 }

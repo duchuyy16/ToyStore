@@ -30,6 +30,21 @@ namespace Services.Function
             throw new NotImplementedException();
         }
 
+        public List<AspNetUser> GetAll()
+        {
+            return _context.AspNetUsers.ToList();
+        }
+
+        public AspNetUser GetById(string id)
+        {
+            return _context.AspNetUsers.SingleOrDefault(u=>u.Id==id)!;
+        }
+
+        public bool IsIdExist(string id)
+        {
+            return _context.AspNetUsers.Any(u => u.Id == id);
+        }
+
         public bool Update(AspNetUser entity)
         {
             throw new NotImplementedException();
