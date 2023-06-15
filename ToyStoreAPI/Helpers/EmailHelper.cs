@@ -34,7 +34,7 @@ namespace ToyStoreAPI.Helpers
         {
 
             var message = new MimeMessage();
-            message.From.Add(new MailboxAddress("", formAdrress));
+            message.From.Add(new MailboxAddress(contactName, formAdrress));
             message.To.Add(new MailboxAddress("", "duchuyy16@gmail.com"));
             message.Subject = "Mail From Contact Us";
             message.Body = new TextPart("html")
