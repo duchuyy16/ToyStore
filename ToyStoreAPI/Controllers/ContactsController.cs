@@ -100,7 +100,7 @@ namespace ToyStoreAPI.Controllers
 
             if (addedContact != null)
             {
-                _emailHelper.SendEmail(addedContact.ContactName,addedContact.Email, addedContact.Message);
+                _emailHelper.SendEmail(addedContact.ContactName, addedContact.Email, addedContact.Message);
             }
 
             return new ContactModel
