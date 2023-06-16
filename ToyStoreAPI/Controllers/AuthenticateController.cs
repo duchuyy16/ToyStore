@@ -136,16 +136,5 @@ namespace ToyStoreAPI.Controllers
             
             return Ok(new Response { Status = "Success", Message = "User created successfully!" });
         }
-
-
-
-
-        //[Authorize]
-        //[HttpPost]
-        //public async Task Logout()
-        //{
-        //    await signInMa
-
-        //}
     }
 }
