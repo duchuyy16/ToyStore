@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.IdentityModel.Tokens;
 using MimeKit;
 using System.IdentityModel.Tokens.Jwt;
@@ -19,21 +20,19 @@ namespace ToyStoreAPI.Controllers
     [ApiController]
     public class AuthenticateController : ControllerBase
     {
-        private readonly Account _account;
         private readonly EmailHelper _emailHelper;
         private readonly UserManager<IdentityUser> _userManager;
         private readonly RoleManager<IdentityRole> _roleManager;
         private readonly IConfiguration _configuration;
         private readonly SignInManager<IdentityUser> _signInManager;
 
-        public AuthenticateController(UserManager<IdentityUser> userManager, RoleManager<IdentityRole> roleManager, IConfiguration configuration, SignInManager<IdentityUser> signInManager, Account account, EmailHelper email)
+        public AuthenticateController(UserManager<IdentityUser> userManager, RoleManager<IdentityRole> roleManager, IConfiguration configuration, SignInManager<IdentityUser> signInManager, EmailHelper email)
         {
             _emailHelper = email;
             _userManager = userManager;
             _roleManager = roleManager;
             _configuration = configuration;
             _signInManager = signInManager;
-            _account = account;
         }
 
         [HttpPost]
@@ -170,29 +169,82 @@ namespace ToyStoreAPI.Controllers
         [Route("reset-password-token/{email}")]
         public async Task<IActionResult> ResetPasswordToken(string email)
         {
-            var user = await _userManager.FindByEmailAsync(email);
+                var user = await _userManager.FindByEmailAsync(email);
             if (user == null)
                 return StatusCode(StatusCodes.Status404NotFound, new Response { Status = "Error", Message = "User does not exists!" });
 
             var token = await _userManager.GeneratePasswordResetTokenAsync(user);
+            var encodeToken = Encoding.UTF8.GetBytes(token);
+            var validToken=WebEncoders.Base64UrlEncode(encodeToken);
 
-            var url = $"https://localhost:7124/reset-password?email={email}&token={token}";
+            var url = $"https://localhost:7124/reset-password?email={email}&token={validToken}";
 
+            //_emailHelper.SendEmailResetPassword(email, @"
+            //    <html>
+            //    <body>
+            //        <h1>Reset Your Password</h1>
+            //        <p>You have requested to reset your password. Please click on the link below:</p>
+            //        <p><a href=""" + url + @""">Reset Password</a></p>
+            //        <p>If you did not request this, please ignore this email.</p>
+            //        <p>Best regards,</p>
+            //        <p>ToyStore</p>
+            //    </body>
+            //    </html>");
             _emailHelper.SendEmailResetPassword(email, @"
-                <html>
-                <body>
+            <html>
+            <head>
+                <style>
+            /* Thiết lập các kiểu định dạng CSS */
+                    body {
+                        font-family: Arial, sans-serif;
+                    }
+                    .container {
+                        max-width: 600px;
+                        margin: 0 auto;
+                        padding: 20px;
+                    }
+                    .logo {
+                        text-align: center;
+                        margin-bottom: 20px;
+                    }
+                    .logo img {
+                        max-width: 200px;
+                    }
+                    h1 {
+                        text-align: center;
+                        color: #333;
+                    }
+                    p {
+                        line-height: 1.5;
+                        margin-bottom: 10px;
+                    }
+                    .button {
+                        display: inline-block;
+                        padding: 10px 20px;
+                        color: #fff;
+                        text-decoration: none;
+                        bordelm r-radius: 4px;
+                    }
+                </style>
+            </head>
+            <body>
+                <div class=""container"">
+                    //<div class=""logo"">
+                    //    <img src="""" alt=""Logo"">
+                    //</div>
                     <h1>Reset Your Password</h1>
                     <p>You have requested to reset your password. Please click on the link below:</p>
-                    <p><a href=""" + url + @""">Reset Password</a></p>
+                    <p><a href=""" + url + @""" class=""button"">Reset Password</a></p>
                     <p>If you did not request this, please ignore this email.</p>
                     <p>Best regards,</p>
                     <p>ToyStore</p>
-                </body>
-                </html>");
+                </div>
+            </body>
+            </html>");
 
             return Ok(new Response { Status = "Success", Message = "Reset password URL has been sent to the email successfully!" });
         }
-
+        
         [HttpPost]
         [Route("reset-password")]
         public async Task<IActionResult> ResetPassword([FromBody] ResetPasswordModel model)
@@ -203,11 +255,11 @@ namespace ToyStoreAPI.Controllers
 
             if (string.Compare(model.NewPassword, model.ConfirmNewPassword) != 0)
                 return StatusCode(StatusCodes.Status400BadRequest, new Response { Status = "Error", Message = "The new password and confirm new password does not match!" });
+        
+            var decodeToken = WebEncoders.Base64UrlDecode(model.Token!);
+            string normalToken = Encoding.UTF8.GetString(decodeToken);
 
-            if (string.IsNullOrEmpty(model.Token))
-                return StatusCode(StatusCodes.Status400BadRequest, new Response { Status = "Error", Message = "Invalid Token!" });
-
-            var result = await _userManager.ResetPasswordAsync(userExists, model.Token, model.NewPassword);
+            var result = await _userManager.ResetPasswordAsync(userExists, normalToken, model.NewPassword);
 
             if (result.Succeeded)
                 return Ok(new Response { Status = "Success", Message = "Password Reseted successfully!" });
