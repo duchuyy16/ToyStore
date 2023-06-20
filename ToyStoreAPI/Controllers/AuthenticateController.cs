@@ -180,68 +180,68 @@ namespace ToyStoreAPI.Controllers
             var url = $"https://localhost:7124/reset-password?email={email}&token={validToken}";
 
             //_emailHelper.SendEmailResetPassword(email, @"
-            //    <html>
-            //    <body>
+            //<html>
+            //<head>
+            //    <style>
+            ///* Thiết lập các kiểu định dạng CSS */
+            //        body {
+            //            font-family: Arial, sans-serif;
+            //        }
+            //        .container {
+            //            max-width: 600px;
+            //            margin: 0 auto;
+            //            padding: 20px;
+            //        }
+            //        .logo {
+            //            text-align: center;
+            //            margin-bottom: 20px;
+            //        }
+            //        .logo img {
+            //            max-width: 200px;
+            //        }
+            //        h1 {
+            //            text-align: center;
+            //            color: #333;
+            //        }
+            //        p {
+            //            line-height: 1.5;
+            //            margin-bottom: 10px;
+            //        }
+            //        .button {
+            //            display: inline-block;
+            //            padding: 10px 20px;
+            //            color: #fff;
+            //            text-decoration: none;
+            //            bordelm r-radius: 4px;
+            //        }
+            //    </style>
+            //</head>
+            //<body>
+            //    <div class=""container"">
+            //        //<div class=""logo"">
+            //        //    <img src="""" alt=""Logo"">
+            //        //</div>
             //        <h1>Reset Your Password</h1>
             //        <p>You have requested to reset your password. Please click on the link below:</p>
-            //        <p><a href=""" + url + @""">Reset Password</a></p>
+            //        <p><a href=""" + url + @""" class=""button"">Reset Password</a></p>
             //        <p>If you did not request this, please ignore this email.</p>
             //        <p>Best regards,</p>
             //        <p>ToyStore</p>
-            //    </body>
-            //    </html>");
+            //    </div>
+            //</body>
+            //</html>");
+
             _emailHelper.SendEmailResetPassword(email, @"
-            <html>
-            <head>
-                <style>
-            /* Thiết lập các kiểu định dạng CSS */
-                    body {
-                        font-family: Arial, sans-serif;
-                    }
-                    .container {
-                        max-width: 600px;
-                        margin: 0 auto;
-                        padding: 20px;
-                    }
-                    .logo {
-                        text-align: center;
-                        margin-bottom: 20px;
-                    }
-                    .logo img {
-                        max-width: 200px;
-                    }
-                    h1 {
-                        text-align: center;
-                        color: #333;
-                    }
-                    p {
-                        line-height: 1.5;
-                        margin-bottom: 10px;
-                    }
-                    .button {
-                        display: inline-block;
-                        padding: 10px 20px;
-                        color: #fff;
-                        text-decoration: none;
-                        bordelm r-radius: 4px;
-                    }
-                </style>
-            </head>
-            <body>
-                <div class=""container"">
-                    //<div class=""logo"">
-                    //    <img src="""" alt=""Logo"">
-                    //</div>
+                <html>
+                <body>
                     <h1>Reset Your Password</h1>
                     <p>You have requested to reset your password. Please click on the link below:</p>
-                    <p><a href=""" + url + @""" class=""button"">Reset Password</a></p>
+                    <p><a href=""" + url + @""">Reset Password</a></p>
                     <p>If you did not request this, please ignore this email.</p>
                     <p>Best regards,</p>
                     <p>ToyStore</p>
-                </div>
-            </body>
-            </html>");
-
+                </body>
+                </html>");
             return Ok(new Response { Status = "Success", Message = "Reset password URL has been sent to the email successfully!" });
         }
         
