@@ -184,7 +184,7 @@ namespace ToyStoreAPI.Controllers
             //<head>
             //    <style>
             ///* Thiết lập các kiểu định dạng CSS */
-            //        body {
+            //        body {    
             //            font-family: Arial, sans-serif;
             //        }
             //        .container {
