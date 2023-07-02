@@ -8,6 +8,7 @@ using Services.Models;
 using System.Text;
 using ToyStoreAPI.Auth;
 using ToyStoreAPI.Helpers;
+using ToyStoreAPI.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 ConfigurationManager configuration = builder.Configuration;

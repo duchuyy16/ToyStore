@@ -5,6 +5,7 @@ using ToyStoreAPI.Models;
 namespace ToyStoreAPI.Controllers
 {
     [Authorize(Roles = UserRoles.Admin)]
+
     //[Authorize]
     [ApiController]
     [Route("api/[controller]")]
